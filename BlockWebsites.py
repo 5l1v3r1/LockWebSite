@@ -35,16 +35,17 @@ class WebsiteBlock:
         for l in file.readlines():
             content += l
         return content
-    def __write_file(self,path, text):
-        file = open(path, "a")
+    def __write_file(self,path, text, type = "a"):
+        file = open(path, type)
         for l in text:
             file.write("\n"+ l)
+    def __rewrite_file(self,path, text):
+        self.__write_file(path, text, "W")
     def __delete_file(self,path):
         try:
             remove(path)
         except:
             pass
-
     def __backup(self,path1, path2):
         try:
             self.__delete_file(path1)
@@ -52,7 +53,6 @@ class WebsiteBlock:
             print("Backup - Sucess ")
         except:
             print("Backup - there was mistake error ")
-
     def block(self):
 
         pass
