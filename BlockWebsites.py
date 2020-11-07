@@ -13,7 +13,9 @@ class WebsiteBlock:
             content += l
         return content
     def __write_file(self,path, text):
-        pass
+        file = open(path, "a")
+        for l in text:
+            file.write("\n"+ l)
 
     def block(self):
 
@@ -38,9 +40,6 @@ for l in file.readlines():
 
 # Modifica Host
 
-lista = ["web1", "web2", "Web3"]
-file = open(hostPath, "a")
-for d in lista:
-    file.write("\n"+ d)
+
 
 """
