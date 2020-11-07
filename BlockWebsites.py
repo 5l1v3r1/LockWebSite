@@ -3,7 +3,7 @@ from os import remove
 
 class WebsiteBlock:
     def __init__(self):
-        #self.hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
+        self.hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
         self.pathListWeb = r"list websites.txt"
         self.hostsTextOriginal = ""\
         "# Copyright (c) 1993-2009 Microsoft Corp.\n"\
@@ -27,7 +27,7 @@ class WebsiteBlock:
         "# localhost name resolution is handled within DNS itself.\n"\
         "#	127.0.0.1       localhost\n"\
         "#	::1             localhost"
-        self.hostsPath = r"test.txt"
+        #self.hostsPath = r"test.txt"
 
     def __read_file(self, path):
         content = ""
@@ -36,12 +36,18 @@ class WebsiteBlock:
             content += l
         file.close()
         return content
-    def __write_file(self,path, text, type = "a"):
+    def __write_file(self,path, text,split = True, type = "a"):
         file = open(path, type)
-        file.write(text)
+        try:
+            for t in text.split("\n"):
+                file.write("\n127.0.0.1    " + t) if split else file.write(t+"\n")
+        except:
+            print("Falló el split")
+            #file.write(text)
         file.close()
+
     def __rewrite_file(self,path, text):
-        self.__write_file(path, text, "w")
+        self.__write_file(path, text, False, "w")
     def __delete_file(self,path):
         try:
             remove(path)
@@ -68,3 +74,9 @@ class WebsiteBlock:
 
 if __name__ == '__main__':
     pass
+
+
+#WebsiteBlock().block()
+WebsiteBlock().reset()
+
+
